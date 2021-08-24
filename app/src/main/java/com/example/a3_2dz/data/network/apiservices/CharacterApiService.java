@@ -8,12 +8,11 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-//Spisal extends EpisodeAPIService
-public interface CharacterApiService extends EpisodeAPIService {
+public interface CharacterApiService  {
 
     @GET("api/character")
     Call<RickAndMortyResponse<Character>> fetchCharacters();
-    //Spical
+
     @GET("api/character/{id}")
     Call<Character> fetCharactersId(@Path("id") int id);
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a3_2dz.R;
+import com.example.a3_2dz.interf.OnItemClickListener;
 import com.example.a3_2dz.model.Character;
 import com.example.a3_2dz.databinding.ItemCharacterBinding;
 
@@ -20,7 +21,11 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     private ItemCharacterBinding binding;
     private ArrayList<Character> list = new ArrayList<>();
-    private OnItemClickListener listener;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     @NonNull
     @NotNull
@@ -50,23 +55,18 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
         public CharacterViewHolder(@NotNull View itemView) {
             super(itemView);
-            binding.getRoot().setOnClickListener(v -> {
-                listener.onItemClick(getAdapterPosition());
-            });
+
         }
 
         private void onBind(Character item) {
-           binding.ivItemCharacter.setImageResource(R.drawable.ic_launcher_background);
-           binding.tvItemCharacterName.setText(item.getName());
+            Glide.with(binding.ivItemCharacter).load(item.getImage()).into(binding.ivItemCharacter);
+            binding.tvItemCharacterName.setText(item.getName());
+            binding.getRoot().setOnClickListener(v -> {
+                onItemClickListener.OnClickItem(item.getId());
+            });
+//            binding.ivItemCharacter.setImageResource(R.drawable.ic_launcher_background);
+//            binding.tvItemCharacterName.setText(item.getName());
         }
-    }
-
-    interface OnItemClickListener{
-        void onItemClick(int position);
-    }
-
-    public void setOnClickListener(OnItemClickListener listener){
-        this.listener = listener;
     }
 }
 

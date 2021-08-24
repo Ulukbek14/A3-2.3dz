@@ -1,6 +1,5 @@
 package com.example.a3_2dz.model;
 
-import com.example.a3_2dz.model.Info;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

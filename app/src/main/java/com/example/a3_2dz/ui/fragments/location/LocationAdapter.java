@@ -23,7 +23,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public LocationAdapter.ViewHodler onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         binding = ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new LocationAdapter.ViewHodler(binding.getRoot());
+        return new ViewHodler(binding.getRoot());
     }
 
     @Override
@@ -35,8 +35,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public int getItemCount() {
         return list.size();
     }
+
     public void addList2(ArrayList<LocationModel> locationModels){
-        this.list = locationModels;
+        list = locationModels;
         notifyDataSetChanged();
     }
 
@@ -44,10 +45,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         private void onBind(LocationModel locationModel) {
             binding.itemLocation.setText(locationModel.getName());
             binding.itemLocation2.setText(locationModel.getType());
-            binding.itemLocation3.setText(locationModel.getDimension());
-            binding.itemLocation4.setText(locationModel.getResidents());
-            binding.itemLocation5.setText(locationModel.getUrl());
-            binding.itemLocation6.setText(locationModel.getCreated());
+//            binding.itemLocation3.setText(locationModel.getDimension());
+//            binding.itemLocation4.setText(locationModel.getResidents());
+//            binding.itemLocation5.setText(locationModel.getUrl());
+//            binding.itemLocation6.setText(locationModel.getCreated());
         }
         public ViewHodler(@NonNull @NotNull View itemView) {
             super(itemView);

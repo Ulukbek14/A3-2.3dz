@@ -28,9 +28,11 @@
         android:id="@+id/characterDetailFragment"
         android:name="com.example.a3_2dz.ui.fragments.detail.CharacterDetailFragment"
         android:label="fragment_character_detail"
-        tools:layout="@layout/fragment_character_detail" />
-    <argument
-        android:name="position"
-        android:defaultValue="-1"
-        app:argType="integer"/>
+        tools:layout="@layout/fragment_character_detail" >
+        <argument
+            android:name="position"
+            android:defaultValue="-1"
+            app:argType="integer"/>
+    </fragment>
+
 </navigation>

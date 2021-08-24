@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a3_2dz.databinding.FragmentLocationBinding;
+import com.example.a3_2dz.model.RickAndMortyResponse;
 
 import org.jetbrains.annotations.NotNull;
-
 
 
 public class LocationFragment extends Fragment {
@@ -34,20 +35,26 @@ public class LocationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
-        setupRequest();
         initialize();
+        setupRecycler();
+        setupRequest();
+    }
+
+    private void setupRecycler() {
+        binding.rvLocation.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvLocation.setAdapter(locationAdapter);
     }
 
     private void setupRequest() {
-        viewModel.fetchLocation().observe(getViewLifecycleOwner(), locationModelRickAndMortyResponse -> {
-            locationAdapter.addList2(locationModelRickAndMortyResponse.getResults());
-        });
+         viewModel.fetchLocation().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<LocationModel>>() {
+             @Override
+             public void onChanged(RickAndMortyResponse<LocationModel> locationModelRickAndMortyResponse) {
+                 locationAdapter.addList2(locationModelRickAndMortyResponse.getResults());
+             }
+         });
     }
 
-
     private void initialize() {
-        binding.rvLocation.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.rvLocation.setAdapter(locationAdapter);
+        viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
     }
 }

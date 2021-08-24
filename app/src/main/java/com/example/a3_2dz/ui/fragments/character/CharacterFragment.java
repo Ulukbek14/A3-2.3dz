@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a3_2dz.interf.OnItemClickListener;
 import com.example.a3_2dz.ui.adapters.CharacterAdapter;
 import com.example.a3_2dz.R;
 import com.example.a3_2dz.databinding.FragmentCharacterBinding;
@@ -38,9 +39,9 @@ public class CharacterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initialize();
         setupRequest();
+        adaterClick();
+
     }
-
-
     private void initialize() {
         viewModel = new ViewModelProvider(requireActivity()).get(CharacterViewModel.class);
         setupCharacterRecycler();
@@ -49,17 +50,22 @@ public class CharacterFragment extends Fragment {
     private void setupCharacterRecycler() {
         binding.recyclerCharacter.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerCharacter.setAdapter(characterAdapter);
-
-//        characterAdapter.setOnClickListener(position -> {
-//            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-//                    .navigate(CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailFragment().(position);
-//            );
-//        });
+        characterAdapter.setOnItemClickListener(position -> {
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(
+                    CharacterFragmentDirections
+                            .actionCharacterFragmentToCharacterDetailFragment()
+                            .setPosition(position)
+            );
+        });
     }
-
     private void setupRequest() {
         viewModel.fetchCharacters().observe(getViewLifecycleOwner(), characters ->  {
             characterAdapter.addList(characters.getResults());
         });
     }
+    private void adaterClick() {
+
+
+    }
 }
+

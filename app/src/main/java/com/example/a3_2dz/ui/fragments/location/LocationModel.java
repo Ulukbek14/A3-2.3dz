@@ -1,6 +1,5 @@
 package com.example.a3_2dz.ui.fragments.location;
 
-import android.annotation.SuppressLint;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -18,11 +17,6 @@ public class LocationModel {
     @SerializedName("dimension")
     private String dimension;
 
-    @SerializedName("residents")
-    private String residents;
-
-    @SerializedName("url")
-    private String url;
 
     @SerializedName("created")
     private String created;
@@ -59,21 +53,8 @@ public class LocationModel {
         this.dimension = dimension;
     }
 
-    public String getResidents() {
-        return residents;
-    }
 
-    public void setResidents(String residents) {
-        this.residents = residents;
-    }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getCreated() {
         return created;
