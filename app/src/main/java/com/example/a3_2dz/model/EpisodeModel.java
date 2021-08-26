@@ -1,4 +1,4 @@
-package com.example.a3_2dz.ui.fragments.episode;
+package com.example.a3_2dz.model;
 
 import com.google.gson.annotations.SerializedName;
 

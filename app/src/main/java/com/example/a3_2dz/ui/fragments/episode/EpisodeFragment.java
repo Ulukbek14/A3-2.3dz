@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a3_2dz.databinding.FragmentEpisodeBinding;
+import com.example.a3_2dz.ui.adapters.EpisodeAdapter;
 
 import org.jetbrains.annotations.NotNull;
 

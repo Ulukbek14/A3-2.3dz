@@ -6,9 +6,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.example.a3_2dz.R;
+import com.example.a3_2dz.data.network.RetrofitClient;
 import com.example.a3_2dz.interf.OnItemClickListener;
 import com.example.a3_2dz.model.Character;
 import com.example.a3_2dz.databinding.ItemCharacterBinding;
@@ -36,8 +38,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return list.size();
     }
 
@@ -64,9 +65,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             binding.getRoot().setOnClickListener(v -> {
                 onItemClickListener.OnClickItem(item.getId());
             });
-//            binding.ivItemCharacter.setImageResource(R.drawable.ic_launcher_background);
-//            binding.tvItemCharacterName.setText(item.getName());
         }
     }
 }
-

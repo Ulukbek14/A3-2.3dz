@@ -1,4 +1,4 @@
-package com.example.a3_2dz.ui.fragments.episode;
+package com.example.a3_2dz.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3_2dz.databinding.ItemEpisodeBinding;
+import com.example.a3_2dz.model.EpisodeModel;
 
 import org.jetbrains.annotations.NotNull;
 

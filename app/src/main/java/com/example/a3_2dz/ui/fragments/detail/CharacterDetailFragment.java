@@ -40,7 +40,7 @@ public class CharacterDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initialize();
         setupArgs();
-        setupRequest2();
+        setupRequest();
     }
 
 
@@ -51,15 +51,14 @@ public class CharacterDetailFragment extends Fragment {
     private void setupArgs() {
         id = CharacterDetailFragmentArgs.fromBundle(getArguments()).getPosition();
     }
-    private void setupRequest2() {
+    private void setupRequest() {
         viewModel.fetchId(id).observe(getViewLifecycleOwner(), character -> {
-            Glide.with(binding.ivCharacterDetailFragment).load(character.getImage()).into(binding.ivCharacterDetailFragment);
+            Glide.with(binding.ivCharacterDetailFragment)
+                    .load(character.getImage())
+                    .into(binding.ivCharacterDetailFragment);
             binding.tvCharacterNameDetailFragment.setText(character.getName());
             binding.tvCharacterGenderDetailFragment.setText(character.getGender());
 
         });
-
     }
-
-
 }

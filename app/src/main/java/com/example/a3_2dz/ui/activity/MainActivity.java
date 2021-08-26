@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         R.id.characterDetailFragment
                 ).build();
 
- //       NavigationUI.setupWithNavController(binding.btnNav, navController);
+        //       NavigationUI.setupWithNavController(binding.btnNav, navController);
         NavigationUI.setupActionBarWithNavController(this, navController,appBarConfiguration);
         NavigationUI.setupWithNavController(binding.btnNav,navController);
 

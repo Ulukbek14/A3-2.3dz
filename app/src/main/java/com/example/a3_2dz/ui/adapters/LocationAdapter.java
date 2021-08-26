@@ -1,4 +1,4 @@
-package com.example.a3_2dz.ui.fragments.location;
+package com.example.a3_2dz.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3_2dz.databinding.ItemLocationBinding;
+import com.example.a3_2dz.model.LocationModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,10 +46,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         private void onBind(LocationModel locationModel) {
             binding.itemLocation.setText(locationModel.getName());
             binding.itemLocation2.setText(locationModel.getType());
-//            binding.itemLocation3.setText(locationModel.getDimension());
-//            binding.itemLocation4.setText(locationModel.getResidents());
-//            binding.itemLocation5.setText(locationModel.getUrl());
-//            binding.itemLocation6.setText(locationModel.getCreated());
+
         }
         public ViewHodler(@NonNull @NotNull View itemView) {
             super(itemView);

@@ -1,8 +1,8 @@
 package com.example.a3_2dz.data.network;
 
 import com.example.a3_2dz.data.network.apiservices.CharacterApiService;
-import com.example.a3_2dz.ui.fragments.episode.EpisodeAPIService;
-import com.example.a3_2dz.ui.fragments.location.LocationAPIService;
+import com.example.a3_2dz.data.network.apiservices.EpisodeAPIService;
+import com.example.a3_2dz.data.network.apiservices.LocationAPIService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private final OkHttpClient okHttpClient = new OkHttpClient()
+    private OkHttpClient okHttpClient = new OkHttpClient()
             .newBuilder()
             .addInterceptor(provideLoggingInterceptor())
             .callTimeout(30, TimeUnit.SECONDS)
@@ -25,7 +25,7 @@ public class RetrofitClient {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-    private final Retrofit provideRetrofit = new Retrofit.Builder()
+    private Retrofit provideRetrofit = new Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())

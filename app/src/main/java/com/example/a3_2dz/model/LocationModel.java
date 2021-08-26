@@ -1,4 +1,4 @@
-package com.example.a3_2dz.ui.fragments.location;
+package com.example.a3_2dz.model;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -52,9 +52,6 @@ public class LocationModel {
     public void setDimension(String dimension) {
         this.dimension = dimension;
     }
-
-
-
 
     public String getCreated() {
         return created;

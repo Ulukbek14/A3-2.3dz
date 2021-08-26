@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a3_2dz.databinding.FragmentLocationBinding;
+import com.example.a3_2dz.model.LocationModel;
 import com.example.a3_2dz.model.RickAndMortyResponse;
+import com.example.a3_2dz.ui.adapters.LocationAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,12 +48,12 @@ public class LocationFragment extends Fragment {
     }
 
     private void setupRequest() {
-         viewModel.fetchLocation().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<LocationModel>>() {
-             @Override
-             public void onChanged(RickAndMortyResponse<LocationModel> locationModelRickAndMortyResponse) {
-                 locationAdapter.addList2(locationModelRickAndMortyResponse.getResults());
-             }
-         });
+        viewModel.fetchLocation().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<LocationModel>>() {
+            @Override
+            public void onChanged(RickAndMortyResponse<LocationModel> locationModelRickAndMortyResponse) {
+                locationAdapter.addList2(locationModelRickAndMortyResponse.getResults());
+            }
+        });
     }
 
     private void initialize() {

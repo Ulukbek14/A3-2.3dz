@@ -3,7 +3,7 @@ package com.example.a3_2dz.ui.fragments.character;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.a3_2dz.data.network.apiservices.App;
+import com.example.a3_2dz.app.App;
 import com.example.a3_2dz.model.RickAndMortyResponse;
 import com.example.a3_2dz.model.Character;
 

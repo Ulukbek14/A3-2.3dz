@@ -1,6 +1,6 @@
-package com.example.a3_2dz.ui.fragments.episode;
+package com.example.a3_2dz.data.network.apiservices;
 
-import com.example.a3_2dz.ui.fragments.episode.EpisodeModel;
+import com.example.a3_2dz.model.EpisodeModel;
 import com.example.a3_2dz.model.RickAndMortyResponse;
 
 import retrofit2.Call;
