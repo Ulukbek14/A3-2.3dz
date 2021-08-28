@@ -1,5 +1,8 @@
 package com.example.a3_2dz.ui.fragments.location;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,9 +26,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class LocationFragment extends Fragment {
 
-    FragmentLocationBinding binding;
-    LocationViewModel viewModel;
-    LocationAdapter locationAdapter = new LocationAdapter();
+    private LocationAdapter locationAdapter = new LocationAdapter();
+    private LocationViewModel viewModel;
+    private FragmentLocationBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,28 +38,35 @@ public class LocationFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initialize();
-        setupRecycler();
-        setupRequest();
+        viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
+        initalize();
+        isConnectInternet();
     }
 
-    private void setupRecycler() {
-        binding.rvLocation.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvLocation.setAdapter(locationAdapter);
-    }
-
-    private void setupRequest() {
-        viewModel.fetchLocation().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<LocationModel>>() {
-            @Override
-            public void onChanged(RickAndMortyResponse<LocationModel> locationModelRickAndMortyResponse) {
-                locationAdapter.addList2(locationModelRickAndMortyResponse.getResults());
-            }
+    private void setupRequests() {
+        viewModel.fetchLocations().observe(getViewLifecycleOwner(),locationRickAndMortyResponse -> {
+            locationAdapter.addList(locationRickAndMortyResponse.getResults());
         });
     }
 
-    private void initialize() {
-        viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
+    private void isConnectInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            setupRequests();
+        } else {
+            locationAdapter.addList(viewModel.getLocations());
+        }
+    }
+
+    private void initalize() {
+        setupLocationRecycler();
+    }
+
+    private void setupLocationRecycler() {
+        binding.rvLocation.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvLocation.setAdapter(locationAdapter);
     }
 }

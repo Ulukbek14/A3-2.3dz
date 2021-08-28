@@ -13,22 +13,22 @@ import com.example.a3_2dz.model.EpisodeModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHolder> {
+public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder> {
 
-    ItemEpisodeBinding binding;
-    ArrayList<EpisodeModel> list = new ArrayList<>();
+    private ItemEpisodeBinding binding;
+    private List<EpisodeModel> list = new ArrayList<>();
 
     @NonNull
-    @NotNull
     @Override
-    public EpisodeAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ItemEpisodeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding.getRoot());
+        return new  EpisodeViewHolder(binding.getRoot()) ;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull EpisodeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
         holder.onBind(list.get(position));
     }
 
@@ -36,20 +36,21 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
     public int getItemCount() {
         return list.size();
     }
-    public void addList(ArrayList<EpisodeModel> episodeModels){
-        this.list = episodeModels;
+    public void addList(List<EpisodeModel> list){
+        this.list = list;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class EpisodeViewHolder extends RecyclerView.ViewHolder {
+
         private void onBind(EpisodeModel episodeModel){
             binding.itemEpisode.setText(episodeModel.getName());
             binding.itemEpisode2.setText(episodeModel.getAir_date());
-            binding.itemEpisode3.setText(episodeModel.getEpisode());
-            binding.itemEpisode4.setText(episodeModel.getCreated());
+            binding.itemEpisode3.setText(episodeModel.getCreated());
+            binding.itemEpisode4.setText(episodeModel.getEpisode());
         }
 
-        public ViewHolder(@NonNull @NotNull View itemView) {
+        public EpisodeViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

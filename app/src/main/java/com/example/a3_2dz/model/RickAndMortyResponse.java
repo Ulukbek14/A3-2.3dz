@@ -4,8 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class RickAndMortyResponse<T> {
-
+public class RickAndMortyResponse<T> extends Character {
     @SerializedName("info")
     private Info info;
 

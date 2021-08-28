@@ -1,5 +1,8 @@
 package com.example.a3_2dz.ui.fragments.episode;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,36 +16,49 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a3_2dz.databinding.FragmentEpisodeBinding;
+import com.example.a3_2dz.model.EpisodeModel;
 import com.example.a3_2dz.ui.adapters.EpisodeAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class EpisodeFragment extends Fragment {
 
-    FragmentEpisodeBinding binding;
-    EpisodeViewModel viewModel;
-    EpisodeAdapter episodeAdapter = new EpisodeAdapter();
+    private FragmentEpisodeBinding binding;
+    private EpisodeViewModel viewModel;
+    private EpisodeAdapter episodeAdapter = new EpisodeAdapter();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentEpisodeBinding.inflate(inflater,container,false);
+        binding = FragmentEpisodeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(EpisodeViewModel.class);
-        setupRequest();
+        viewModel =
+                new ViewModelProvider(requireActivity()).get(EpisodeViewModel.class);
         initialize();
+        isConnectInternet();
     }
 
-
-    private void setupRequest() {
-        viewModel.fetchEpisode().observe(getViewLifecycleOwner(), episodeModelRickAndMortyResponse -> {
-            episodeAdapter.addList(episodeModelRickAndMortyResponse.getResults());
+    private void setupRequests() {
+        viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), episodeRickAndMortyResponse -> {
+            episodeAdapter.addList(episodeRickAndMortyResponse.getResults());
         });
+    }
+
+    private void isConnectInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            setupRequests();
+        } else {
+            episodeAdapter.addList(viewModel.getEpisodes());
+        }
     }
 
     private void initialize() {

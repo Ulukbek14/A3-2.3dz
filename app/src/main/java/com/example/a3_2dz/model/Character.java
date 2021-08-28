@@ -10,8 +10,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
-public class Character implements Serializable {
-
+@Entity
+public class Character {
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -24,9 +25,6 @@ public class Character implements Serializable {
     @SerializedName("species")
     private String species;
 
-    @SerializedName("type")
-    private String type;
-
     @SerializedName("gender")
     private String gender;
 
@@ -36,21 +34,15 @@ public class Character implements Serializable {
     @SerializedName("created")
     private String created;
 
-    public int getId() {
-        return id;
+    public String getCreated() {
+        return created;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCreated(String created) {
+        this.created = created;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getStatus() {
         return status;
@@ -66,14 +58,6 @@ public class Character implements Serializable {
 
     public void setSpecies(String species) {
         this.species = species;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getGender() {
@@ -92,11 +76,19 @@ public class Character implements Serializable {
         this.image = image;
     }
 
-    public String getCreated() {
-        return created;
+    public int getId() {
+        return id;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

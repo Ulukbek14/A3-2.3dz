@@ -1,9 +1,13 @@
 package com.example.a3_2dz.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class EpisodeModel {
-
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -18,22 +22,6 @@ public class EpisodeModel {
 
     @SerializedName("created")
     private String created;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getAir_date() {
         return air_date;
@@ -58,4 +46,21 @@ public class EpisodeModel {
     public void setCreated(String created) {
         this.created = created;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

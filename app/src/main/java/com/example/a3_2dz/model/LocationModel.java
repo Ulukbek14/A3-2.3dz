@@ -1,10 +1,14 @@
 package com.example.a3_2dz.model;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class LocationModel {
-
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -16,10 +20,6 @@ public class LocationModel {
 
     @SerializedName("dimension")
     private String dimension;
-
-
-    @SerializedName("created")
-    private String created;
 
     public int getId() {
         return id;
@@ -60,4 +60,7 @@ public class LocationModel {
     public void setCreated(String created) {
         this.created = created;
     }
+
+    @SerializedName("created")
+    private String created;
 }

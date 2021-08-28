@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Info {
-
     @SerializedName("count")
     private int count;
 

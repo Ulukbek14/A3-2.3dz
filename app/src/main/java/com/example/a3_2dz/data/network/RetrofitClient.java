@@ -1,6 +1,6 @@
 package com.example.a3_2dz.data.network;
 
-import com.example.a3_2dz.data.network.apiservices.CharacterApiService;
+import com.example.a3_2dz.data.network.apiservices.CharacterAPIService;
 import com.example.a3_2dz.data.network.apiservices.EpisodeAPIService;
 import com.example.a3_2dz.data.network.apiservices.LocationAPIService;
 
@@ -16,12 +16,12 @@ public class RetrofitClient {
     private OkHttpClient okHttpClient = new OkHttpClient()
             .newBuilder()
             .addInterceptor(provideLoggingInterceptor())
-            .callTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build();
 
-    private HttpLoggingInterceptor provideLoggingInterceptor(){
+    private HttpLoggingInterceptor provideLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
@@ -31,15 +31,13 @@ public class RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public CharacterApiService provideCharacterApiService(){
-        return provideRetrofit.create(CharacterApiService.class);
+    public CharacterAPIService provideCharacterApiService() {
+        return provideRetrofit.create(CharacterAPIService.class);
     }
-
     public EpisodeAPIService provideEpisodeApiService(){
         return provideRetrofit.create(EpisodeAPIService.class);
     }
-
-    public LocationAPIService provideLocationApiService() {
+    public LocationAPIService provideLocationApiService(){
         return provideRetrofit.create(LocationAPIService.class);
     }
 }

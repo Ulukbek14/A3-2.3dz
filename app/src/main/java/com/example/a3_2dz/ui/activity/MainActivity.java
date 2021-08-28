@@ -18,13 +18,12 @@ import com.example.a3_2dz.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private NavController navController;
     private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater()) ;
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setupNavigation();
     }
@@ -42,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         R.id.characterDetailFragment
                 ).build();
 
-        //       NavigationUI.setupWithNavController(binding.btnNav, navController);
         NavigationUI.setupActionBarWithNavController(this, navController,appBarConfiguration);
         NavigationUI.setupWithNavController(binding.btnNav,navController);
-
     }
 }

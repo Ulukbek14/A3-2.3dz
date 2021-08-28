@@ -13,22 +13,22 @@ import com.example.a3_2dz.model.LocationModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHodler> {
+public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
 
-    ItemLocationBinding binding;
-    ArrayList<LocationModel> list = new ArrayList<>();
+    private ItemLocationBinding binding;
+    private List<LocationModel> list = new ArrayList<>();
 
     @NonNull
-    @NotNull
     @Override
-    public LocationAdapter.ViewHodler onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHodler(binding.getRoot());
+        return new LocationViewHolder(binding.getRoot()) ;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull LocationAdapter.ViewHodler holder, int position) {
+    public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
         holder.onBind(list.get(position));
     }
 
@@ -37,18 +37,21 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return list.size();
     }
 
-    public void addList2(ArrayList<LocationModel> locationModels){
-        list = locationModels;
+    public void addList(List<LocationModel> list){
+        this.list = list;
         notifyDataSetChanged();
     }
 
-    public class ViewHodler extends RecyclerView.ViewHolder {
-        private void onBind(LocationModel locationModel) {
+    public class LocationViewHolder extends RecyclerView.ViewHolder {
+
+        private void onBind(LocationModel locationModel){
             binding.itemLocation.setText(locationModel.getName());
             binding.itemLocation2.setText(locationModel.getType());
-
+            binding.itemLocation3.setText(locationModel.getDimension());
+            binding.itemLocation4.setText(locationModel.getCreated());
         }
-        public ViewHodler(@NonNull @NotNull View itemView) {
+
+        public LocationViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

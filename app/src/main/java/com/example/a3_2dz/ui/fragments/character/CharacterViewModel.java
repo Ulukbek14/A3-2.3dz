@@ -4,48 +4,25 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.a3_2dz.app.App;
+import com.example.a3_2dz.data.repository.CharacterRepository;
 import com.example.a3_2dz.model.RickAndMortyResponse;
 import com.example.a3_2dz.model.Character;
 
-import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.List;
 
 public class CharacterViewModel extends ViewModel {
 
-    public MutableLiveData<RickAndMortyResponse<Character>> fetchCharacters(){
-        MutableLiveData<RickAndMortyResponse<Character>> data = new MutableLiveData<>();
-        App.characterApiService.fetchCharacters().enqueue(new Callback<RickAndMortyResponse<Character>>() {
-            @Override
-            public void onResponse(Call<RickAndMortyResponse<Character>> call, Response<RickAndMortyResponse<Character>> response) {
-                data.setValue(response.body());
-            }
+    private final CharacterRepository repository = new CharacterRepository();
 
-            @Override
-            public void onFailure(Call<RickAndMortyResponse<Character>> call, Throwable t) {
-                data.setValue(null);
-            }
-        });
-        return data;
+    MutableLiveData<RickAndMortyResponse<Character>> fetchCharacters() {
+        return repository.fetchCharacters();
     }
 
-
-    public MutableLiveData<Character> fetchId(int id){
-        MutableLiveData<Character> dataId = new MutableLiveData<>();
-        App.characterApiService.fetCharactersId(id).enqueue(new Callback<Character>() {
-            @Override
-            public void onResponse(Call<Character> call, @NotNull Response<Character> response) {
-                dataId.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Character> call, Throwable t) {
-                dataId.setValue(null);
-            }
-        });
-        return dataId;
+    public MutableLiveData<Character> fetchData(int id) {
+        return repository.fetchData(id);
     }
 
+    List<Character> getCharacters() {
+        return repository.getCharacters();
+    }
 }
