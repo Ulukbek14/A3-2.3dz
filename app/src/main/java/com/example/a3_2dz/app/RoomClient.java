@@ -12,6 +12,7 @@ public class RoomClient {
 
     public APPDataBase provideDatabase(Context context) {
         APPDataBase db = Room
+
                 .databaseBuilder(context, APPDataBase.class, "rick-and-morty_database")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()

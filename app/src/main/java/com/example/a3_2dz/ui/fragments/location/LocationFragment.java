@@ -36,6 +36,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     private int pastVisiblesItems;
     public LinearLayoutManager linearLayoutManager;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
 
+
         AppBarConfiguration appBarConfiguration =
                 new AppBarConfiguration.Builder(
                         R.id.characterFragment,

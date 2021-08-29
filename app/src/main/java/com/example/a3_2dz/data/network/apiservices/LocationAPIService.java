@@ -10,5 +10,6 @@ import retrofit2.http.Query;
 public interface LocationAPIService {
 
     @GET("api/location")
+
     Call<RickAndMortyResponse<LocationModel>> fetchLocations(@Query("page") int page);
 }

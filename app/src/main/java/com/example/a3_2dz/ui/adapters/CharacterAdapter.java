@@ -23,7 +23,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     private OnItemClick listener;
     private List<Character> list = new ArrayList<>();
-
     @NonNull
     @Override
     public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,10 +53,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         }
 
         private void onBind(Character item) {
-            Glide
-                    .with(binding.ivItemCharacter)
-                    .load(item.getImage())
-                    .into(binding.ivItemCharacter);
+            Glide.with(binding.ivItemCharacter).load(item.getImage()).into(binding.ivItemCharacter);
             binding.tvItemCharacterName.setText(item.getName());
             binding.getRoot().setOnClickListener(v -> {
                 listener.onItemClick(item.getId());

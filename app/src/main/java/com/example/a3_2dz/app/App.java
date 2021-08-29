@@ -20,6 +20,7 @@ public class App extends Application {
     public static LocationDao locationDao;
     public RetrofitClient retrofitClient = new RetrofitClient();
 
+
     @Override
     public void onCreate() {
         super.onCreate();

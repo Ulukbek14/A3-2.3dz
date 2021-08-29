@@ -15,6 +15,7 @@ import retrofit2.Response;
 public class EpisodeRepository {
 
     int page;
+
     public MutableLiveData<RickAndMortyResponse<EpisodeModel>> fetchEpisodes(int page){
         MutableLiveData<RickAndMortyResponse<EpisodeModel>> data = new MutableLiveData<>();
         App.episodeApiService.fetchEpisodes(page).enqueue(new Callback<RickAndMortyResponse<EpisodeModel>>() {

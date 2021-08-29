@@ -11,6 +11,7 @@ import retrofit2.http.Query;
 public interface CharacterAPIService extends EpisodeAPIService{
 
     @GET("api/character")
+
     Call<RickAndMortyResponse<Character>> fetchCharacters(
             @Query("page") int page);
     @GET("api/character/{id}")

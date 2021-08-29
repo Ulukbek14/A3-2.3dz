@@ -12,6 +12,7 @@ import com.example.a3_2dz.model.LocationModel;
 
 @Database(entities = {Character.class, EpisodeModel.class, LocationModel.class},version = 3)
 abstract class APPDataBase extends  RoomDatabase {
+
     public abstract CharacterDao characterDao();
     public abstract EpisodeDao episodeDao();
     public abstract LocationDao locationDao();

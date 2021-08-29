@@ -16,6 +16,7 @@ public class CharacterViewModel extends BaseViewModel {
     int page = 1;
     private final CharacterRepository repository = new CharacterRepository();
 
+
     MutableLiveData<RickAndMortyResponse<Character>> fetchCharacters() {
         return repository.fetchCharacters(page);
     }

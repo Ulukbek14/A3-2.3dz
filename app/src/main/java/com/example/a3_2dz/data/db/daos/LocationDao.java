@@ -13,6 +13,7 @@ import java.util.List;
 @Dao
 public interface LocationDao {
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ArrayList<LocationModel> locationModel);
 
