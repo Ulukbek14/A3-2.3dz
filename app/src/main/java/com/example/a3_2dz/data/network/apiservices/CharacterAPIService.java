@@ -8,9 +8,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface CharacterAPIService {
+public interface CharacterAPIService extends EpisodeAPIService{
+
     @GET("api/character")
-    Call<RickAndMortyResponse<Character>> fetchCharacters();
+    Call<RickAndMortyResponse<Character>> fetchCharacters(
+            @Query("page") int page);
     @GET("api/character/{id}")
     Call<Character> fetCharactersId(@Path("id") int id);
 }

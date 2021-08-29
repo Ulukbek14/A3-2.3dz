@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 @Entity
-public class EpisodeModel {
+public class EpisodeModel{
     @PrimaryKey
     @SerializedName("id")
     private int id;

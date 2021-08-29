@@ -15,13 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.a3_2dz.base.BaseFragment;
 import com.example.a3_2dz.model.Character;
 import com.example.a3_2dz.ui.fragments.character.CharacterViewModel;
 import com.example.a3_2dz.databinding.FragmentCharacterDetailBinding;
 
 import org.jetbrains.annotations.NotNull;
 
-public class CharacterDetailFragment extends Fragment {
+public class CharacterDetailFragment extends BaseFragment<CharacterViewModel, FragmentCharacterDetailBinding> {
 
     private FragmentCharacterDetailBinding binding;
     private CharacterViewModel viewModel;
@@ -37,16 +38,23 @@ public class CharacterDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(CharacterViewModel.class);
         setupArgs();
-        setupRequests();
     }
 
     private void setupArgs() {
         id = CharacterDetailFragmentArgs.fromBundle(getArguments()).getPosition();
     }
-    private void setupRequests() {
-        viewModel.fetchData(id).observe(getViewLifecycleOwner(),character -> {
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        viewModel = new ViewModelProvider(requireActivity()).get(CharacterViewModel.class);
+    }
+
+    @Override
+    protected void setUpRequests() {
+        super.setUpRequests();
+        viewModel.fetchData(id).observe(getViewLifecycleOwner(), character -> {
             Glide.with(binding.ivCharacterDetailFragment)
                     .load(character.getImage())
                     .into(binding.ivCharacterDetailFragment);

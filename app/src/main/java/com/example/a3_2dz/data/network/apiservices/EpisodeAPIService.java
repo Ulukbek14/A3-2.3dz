@@ -8,7 +8,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface EpisodeAPIService {
+
     @GET("api/episode")
-    Call<RickAndMortyResponse<EpisodeModel>> fetchEpisodes();
+    Call<RickAndMortyResponse<EpisodeModel>> fetchEpisodes(@Query("page") int page);
 
 }

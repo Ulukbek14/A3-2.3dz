@@ -17,14 +17,12 @@ import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
 
-    private ItemLocationBinding binding;
     private List<LocationModel> list = new ArrayList<>();
 
     @NonNull
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new LocationViewHolder(binding.getRoot()) ;
+        return new LocationViewHolder(ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -37,22 +35,24 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         return list.size();
     }
 
-    public void addList(List<LocationModel> list){
+    public void addList(List<LocationModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
+        ItemLocationBinding binding;
 
-        private void onBind(LocationModel locationModel){
+        public LocationViewHolder(@NonNull ItemLocationBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        private void onBind(LocationModel locationModel) {
             binding.itemLocation.setText(locationModel.getName());
             binding.itemLocation2.setText(locationModel.getType());
             binding.itemLocation3.setText(locationModel.getDimension());
             binding.itemLocation4.setText(locationModel.getCreated());
-        }
-
-        public LocationViewHolder(@NonNull View itemView) {
-            super(itemView);
         }
     }
 }

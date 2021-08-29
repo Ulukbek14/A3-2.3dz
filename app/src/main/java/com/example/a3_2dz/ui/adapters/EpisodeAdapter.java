@@ -17,14 +17,12 @@ import java.util.List;
 
 public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder> {
 
-    private ItemEpisodeBinding binding;
     private List<EpisodeModel> list = new ArrayList<>();
 
     @NonNull
     @Override
     public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemEpisodeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new  EpisodeViewHolder(binding.getRoot()) ;
+        return new EpisodeViewHolder(ItemEpisodeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -37,21 +35,22 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         return list.size();
     }
     public void addList(List<EpisodeModel> list){
-        this.list = list;
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
 
-    public class EpisodeViewHolder extends RecyclerView.ViewHolder {
+    class EpisodeViewHolder extends RecyclerView.ViewHolder {
+        ItemEpisodeBinding binding;
 
+        public EpisodeViewHolder( ItemEpisodeBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
         private void onBind(EpisodeModel episodeModel){
             binding.itemEpisode.setText(episodeModel.getName());
             binding.itemEpisode2.setText(episodeModel.getAir_date());
             binding.itemEpisode3.setText(episodeModel.getCreated());
             binding.itemEpisode4.setText(episodeModel.getEpisode());
-        }
-
-        public EpisodeViewHolder(@NonNull View itemView) {
-            super(itemView);
         }
     }
 }
