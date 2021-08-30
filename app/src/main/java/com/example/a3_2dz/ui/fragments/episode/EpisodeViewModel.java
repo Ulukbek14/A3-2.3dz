@@ -26,7 +26,6 @@ public class EpisodeViewModel extends BaseViewModel {
         return repository.fetchEpisodes(page);
     }
 
-
     public List<EpisodeModel> getEpisodes() {
         return repository.getEpisode();
     }

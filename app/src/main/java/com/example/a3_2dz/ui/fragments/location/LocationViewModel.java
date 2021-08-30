@@ -24,7 +24,6 @@ public class LocationViewModel extends BaseViewModel {
         return repository.fetchLocations(page);
     }
 
-
     public List<LocationModel> getLocations() {
         return repository.getLocation();
     }

@@ -37,7 +37,6 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
     private int totalItemCount;
     private int pastVisiblesItems;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

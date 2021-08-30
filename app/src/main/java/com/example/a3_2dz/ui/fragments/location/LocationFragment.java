@@ -50,7 +50,6 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
         isConnectInternet();
     }
 
-
     @Override
     protected void isConnectInternet() {
         super.isConnectInternet();
