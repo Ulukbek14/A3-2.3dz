@@ -2,7 +2,7 @@ package com.example.a3_2dz.data.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.a3_2dz.app.App;
+import com.example.a3_2dz.App;
 import com.example.a3_2dz.model.LocationModel;
 import com.example.a3_2dz.model.RickAndMortyResponse;
 
@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LocationRepository {
+public class LocationRepository  {
 
     int page;
     public MutableLiveData<RickAndMortyResponse<LocationModel>> fetchLocations( int page){

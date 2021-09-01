@@ -1,10 +1,13 @@
 package com.example.a3_2dz.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3_2dz.databinding.ItemEpisodeBinding;
@@ -15,38 +18,46 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder> {
+public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.EpisodeViewHolder> {
 
-    private List<EpisodeModel> list = new ArrayList<>();
+    public static class EpisodeDiffUtil extends DiffUtil.ItemCallback<EpisodeModel> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
+            return oldItem == newItem;
+        }
+    }
+
+    public EpisodeAdapter() {
+        super(new EpisodeDiffUtil());
+    }
 
     @NonNull
     @Override
-    public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EpisodeAdapter.EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new EpisodeViewHolder(ItemEpisodeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
-        holder.onBind(list.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-    public void addList(List<EpisodeModel> list){
-        this.list.addAll(list);
-        notifyDataSetChanged();
+    public void onBindViewHolder(@NonNull EpisodeAdapter.EpisodeViewHolder holder, int position) {
+        holder.onBind(getItem(position));
     }
 
     class EpisodeViewHolder extends RecyclerView.ViewHolder {
         ItemEpisodeBinding binding;
 
-        public EpisodeViewHolder( ItemEpisodeBinding binding) {
+        public EpisodeViewHolder(ItemEpisodeBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-        private void onBind(EpisodeModel episodeModel){
+
+        private void onBind(EpisodeModel episodeModel) {
             binding.itemEpisode.setText(episodeModel.getName());
             binding.itemEpisode2.setText(episodeModel.getAir_date());
             binding.itemEpisode3.setText(episodeModel.getCreated());

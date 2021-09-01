@@ -2,7 +2,7 @@ package com.example.a3_2dz.data.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.a3_2dz.app.App;
+import com.example.a3_2dz.App;
 import com.example.a3_2dz.model.EpisodeModel;
 import com.example.a3_2dz.model.RickAndMortyResponse;
 

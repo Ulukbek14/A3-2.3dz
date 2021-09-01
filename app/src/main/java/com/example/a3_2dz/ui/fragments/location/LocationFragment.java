@@ -25,7 +25,6 @@ import com.example.a3_2dz.ui.adapters.LocationAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
-
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
 
     private LocationAdapter locationAdapter = new LocationAdapter();
@@ -36,32 +35,11 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     private int pastVisiblesItems;
     public LinearLayoutManager linearLayoutManager;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLocationBinding.inflate(inflater, container, false);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        isConnectInternet();
-    }
-
-    @Override
-    protected void isConnectInternet() {
-        super.isConnectInternet();
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            viewModel.fetchLocations().observe(getViewLifecycleOwner(), locationRickAndMortyResponse -> {
-                locationAdapter.addList(locationRickAndMortyResponse.getResults());
-            });
-        } else {
-            locationAdapter.addList(viewModel.getLocations());
-        }
     }
 
     @Override
@@ -80,7 +58,9 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     @Override
     protected void setUpRequests() {
         super.setUpRequests();
-
+        if (!connectInternet()) {
+            locationAdapter.submitList(viewModel.getLocations());
+        }
         binding.rvLocation.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -91,12 +71,21 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                     pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         viewModel.page++;
-                        viewModel.fetchLocations().observe(getViewLifecycleOwner(), characterRickAndMortyResponse -> {
-                            locationAdapter.addList(characterRickAndMortyResponse.getResults());
-                        });
+                        connectInternet();
                     }
                 }
             }
         });
+    }
+
+    private boolean connectInternet() {
+        if (isConnectInternet()) {
+            viewModel.fetchLocations().observe(getViewLifecycleOwner(), locationRickAndMortyResponse -> {
+                locationAdapter.submitList(locationRickAndMortyResponse.getResults());
+            });
+            return true;
+        } else {
+            return false;
+        }
     }
 }

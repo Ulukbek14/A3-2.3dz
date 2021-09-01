@@ -13,11 +13,9 @@ import java.util.List;
 @Dao
 public interface LocationDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(ArrayList<LocationModel> locationModel);
+    void insertAll(ArrayList<LocationModel> locationModels);
 
-    @Query("SELECT * FROM locationModel")
+    @Query("SELECT * FROM locationmodel")
     List<LocationModel> getAll();
-
 }

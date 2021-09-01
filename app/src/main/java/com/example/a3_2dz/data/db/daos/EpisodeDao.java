@@ -13,10 +13,9 @@ import java.util.List;
 @Dao
 public interface EpisodeDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(ArrayList<EpisodeModel> episodeModel);
+    void insertAll(ArrayList<EpisodeModel> episodeModels);
 
-    @Query("SELECT * FROM episodemodel")
+    @Query("SELECT * FROM episodeModel")
     List<EpisodeModel> getAll();
 }

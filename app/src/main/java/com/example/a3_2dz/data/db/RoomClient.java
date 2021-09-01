@@ -1,4 +1,4 @@
-package com.example.a3_2dz.app;
+package com.example.a3_2dz.data.db;
 
 import android.content.Context;
 
@@ -23,10 +23,12 @@ public class RoomClient {
     public CharacterDao provideCharacterDao(APPDataBase appDataBase) {
         return appDataBase.characterDao();
     }
-    public EpisodeDao provideEpisodeDao(APPDataBase appDataBase){
+
+    public EpisodeDao provideEpisodeDao(APPDataBase appDataBase) {
         return appDataBase.episodeDao();
     }
-    public LocationDao provideLocationDao(APPDataBase appDataBase){
-        return  appDataBase.locationDao();
+
+    public LocationDao provideLocationDao(APPDataBase appDataBase) {
+        return appDataBase.locationDao();
     }
 }

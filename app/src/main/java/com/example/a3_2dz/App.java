@@ -1,7 +1,8 @@
-package com.example.a3_2dz.app;
+package com.example.a3_2dz;
 
 import android.app.Application;
 
+import com.example.a3_2dz.data.db.RoomClient;
 import com.example.a3_2dz.data.db.daos.CharacterDao;
 import com.example.a3_2dz.data.db.daos.EpisodeDao;
 import com.example.a3_2dz.data.db.daos.LocationDao;

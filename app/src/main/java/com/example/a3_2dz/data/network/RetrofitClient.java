@@ -12,7 +12,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-
     private OkHttpClient okHttpClient = new OkHttpClient()
             .newBuilder()
             .addInterceptor(provideLoggingInterceptor())

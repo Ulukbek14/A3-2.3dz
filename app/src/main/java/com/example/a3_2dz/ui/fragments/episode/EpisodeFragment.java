@@ -44,26 +44,6 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        isConnectInternet();
-    }
-
-    @Override
-    protected void isConnectInternet() {
-        super.isConnectInternet();
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), episodeRickAndMortyResponse -> {
-                episodeAdapter.addList(episodeRickAndMortyResponse.getResults());
-            });
-        } else {
-            episodeAdapter.addList(viewModel.getEpisodes());
-        }
-    }
-
-    @Override
     protected void initialize() {
         super.initialize();
         setupEpisodeRecycler();
@@ -73,6 +53,9 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     @Override
     protected void setUpRequests() {
         super.setUpRequests();
+        if (!connectInternet()){
+            episodeAdapter.submitList(viewModel.getEpisodes());
+        }
         binding.rvEpisode.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -83,9 +66,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
                     pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         viewModel.page++;
-                        viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), characterRickAndMortyResponse -> {
-                            episodeAdapter.addList(characterRickAndMortyResponse.getResults());
-                        });
+                        connectInternet();
                     }
                 }
             }
@@ -96,5 +77,15 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
         linearLayoutManager = new LinearLayoutManager(getContext());
         binding.rvEpisode.setLayoutManager(linearLayoutManager);
         binding.rvEpisode.setAdapter(episodeAdapter);
+    }
+    private boolean connectInternet() {
+        if (isConnectInternet()) {
+            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), characterRickAndMortyResponse -> {
+                episodeAdapter.submitList(characterRickAndMortyResponse.getResults());
+            });
+            return true;
+        } else {
+            return false;
+        }
     }
 }
