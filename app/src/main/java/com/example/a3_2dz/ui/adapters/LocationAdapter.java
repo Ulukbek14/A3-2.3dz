@@ -59,11 +59,11 @@ public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.
             this.binding = binding;
         }
 
-        private void onBind(LocationModel locationModel) {
-            binding.itemLocation.setText(locationModel.getName());
-            binding.itemLocation2.setText(locationModel.getType());
-            binding.itemLocation3.setText(locationModel.getDimension());
-            binding.itemLocation4.setText(locationModel.getCreated());
+        private void onBind(LocationModel item) {
+            binding.itemLocation.setText(item.getName());
+            binding.itemLocation2.setText(item.getType());
+            binding.itemLocation3.setText(item.getDimension());
+            binding.itemLocation4.setText(item.getCreated());
         }
     }
 }

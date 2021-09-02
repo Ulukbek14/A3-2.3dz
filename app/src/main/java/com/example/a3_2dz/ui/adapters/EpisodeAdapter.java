@@ -57,11 +57,11 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Epi
             this.binding = binding;
         }
 
-        private void onBind(EpisodeModel episodeModel) {
-            binding.itemEpisode.setText(episodeModel.getName());
-            binding.itemEpisode2.setText(episodeModel.getAir_date());
-            binding.itemEpisode3.setText(episodeModel.getCreated());
-            binding.itemEpisode4.setText(episodeModel.getEpisode());
+        private void onBind(EpisodeModel item) {
+            binding.itemEpisode.setText(item.getName());
+            binding.itemEpisode2.setText(item.getAir_date());
+            binding.itemEpisode3.setText(item.getCreated());
+            binding.itemEpisode4.setText(item.getEpisode());
         }
     }
 }

@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 @Entity
 public class LocationModel {
     @PrimaryKey
@@ -20,6 +22,19 @@ public class LocationModel {
 
     @SerializedName("dimension")
     private String dimension;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocationModel location = (LocationModel) o;
+        return id == location.id && Objects.equals(name, location.name) && Objects.equals(type, location.type) && Objects.equals(dimension, location.dimension) && Objects.equals(created, location.created);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, dimension, created);
+    }
 
     public int getId() {
         return id;
